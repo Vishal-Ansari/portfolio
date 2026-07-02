@@ -241,22 +241,18 @@
     .pipeline-rig { padding: 16px 14px 14px; }
     .pipe-node { padding: 8px 11px; font-size: 11px; }
   }
-  .pipe-track-wrap {
-    overflow-x: auto;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    max-width: 100%;
-  }
-  .pipe-track-wrap::-webkit-scrollbar { display: none; }
   .pipe-track {
     display: flex;
     align-items: center;
     gap: 0;
     position: relative;
-    width: fit-content;
-    padding: 6px 2px 6px;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
   }
+  .pipe-track::-webkit-scrollbar { display: none; }
   .pipe-node {
     background: var(--ink);
     border: 1px solid var(--line);
@@ -276,14 +272,15 @@
     border-color: var(--amber);
     color: var(--amber);
     background: var(--amber-soft);
-    transform: translateY(-1px);
+    transform: translateY(2px);
   }
   .pipe-connector {
-    flex: 0 0 40px;
+    flex: 1;
     height: 1px;
     background: var(--line);
     position: relative;
     overflow: hidden;
+    min-width: 16px;
   }
   .pipe-pulse {
     position: absolute;
@@ -802,7 +799,6 @@
         <span>Live pipeline trace</span>
         <span class="hint">click a stage ↓</span>
       </div>
-      <div class="pipe-track-wrap">
       <div class="pipe-track" id="pipeTrack">
         <div class="pipe-node is-active" data-stage="source" tabindex="0">Source</div>
         <div class="pipe-connector"><div class="pipe-pulse"></div></div>
@@ -813,7 +809,6 @@
         <div class="pipe-node" data-stage="core" tabindex="0">Core</div>
         <div class="pipe-connector"><div class="pipe-pulse"></div></div>
         <div class="pipe-node" data-stage="writeback" tabindex="0">Writeback</div>
-      </div>
       </div>
       <div class="pipe-detail" id="pipeDetail">
         <strong>Source —</strong> Raw records land from Dayforce HCM, MidPoint IDM, and Cornerstone LMS via REST APIs with OAuth2, 100+ events daily.
